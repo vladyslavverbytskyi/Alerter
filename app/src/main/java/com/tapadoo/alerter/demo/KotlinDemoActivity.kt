@@ -9,7 +9,6 @@ import android.widget.Toast
 import com.tapadoo.alerter.Alerter
 import com.tapadoo.alerter.OnHideAlertListener
 import com.tapadoo.alerter.OnShowAlertListener
-import com.tapadoo.alerter.demo.R
 import kotlinx.android.synthetic.main.content_example.*
 
 class KotlinDemoActivity : AppCompatActivity() {

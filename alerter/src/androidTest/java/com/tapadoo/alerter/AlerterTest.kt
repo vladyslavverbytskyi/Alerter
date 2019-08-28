@@ -34,7 +34,7 @@ class AlerterTest {
 
     @Test
     fun testConstruction() {
-        val alerter = Alerter.create(activityRule.activity)
+        val alerter = WindowAlerter.create(activityRule.activity)
         Assert.assertNotNull(alerter)
     }
 
@@ -44,7 +44,7 @@ class AlerterTest {
         val childCount = (activityRule.activity.findViewById<View>(android.R.id.content).rootView as ViewGroup).childCount
 
         //Instantiate Alerter
-        val alerter = Alerter.create(activityRule.activity)
+        val alerter = WindowAlerter.create(activityRule.activity)
 
         //Show it to the User
         alerter.show()
@@ -66,7 +66,7 @@ class AlerterTest {
 
     @Test
     fun testBuilderStrings() {
-        val alert = Alerter.create(activityRule.activity)
+        val alert = WindowAlerter.create(activityRule.activity)
                 .setTitle("Hello")
                 .setText("Hi")
                 .show()
@@ -77,18 +77,18 @@ class AlerterTest {
 
     @Test
     fun testBuilderStringsRes() {
-        val alert = Alerter.create(activityRule.activity)
+        val alert = WindowAlerter.create(activityRule.activity)
                 .setTitle(R.string.lib_name)
                 .setText(R.string.msg_no_alert_showing)
                 .show()
 
         Assert.assertSame(alert?.findViewById<TextView>(R.id.tvTitle)?.text, activityRule.activity.getString(R.string.lib_name))
-        Assert.assertSame(alert?.findViewById<TextView>(R.id.tvTitle)?.text, activityRule.activity.getString(R.string.msg_no_alert_showing))
+        Assert.assertSame(alert?.findViewById<TextView>(R.id.tvText)?.text, activityRule.activity.getString(R.string.msg_no_alert_showing))
     }
 
     @Test
     fun testBuilderIcon() {
-        val alert = Alerter.create(activityRule.activity)
+        val alert = WindowAlerter.create(activityRule.activity)
                 .setIcon(android.R.drawable.sym_def_app_icon)
                 .show()
 
@@ -98,7 +98,7 @@ class AlerterTest {
 
     @Test
     fun testBuilderBackground() {
-        val alert = Alerter.create(activityRule.activity)
+        val alert = WindowAlerter.create(activityRule.activity)
                 .setBackgroundColorRes(android.R.color.darker_gray)
                 .show()
 
@@ -115,12 +115,12 @@ class AlerterTest {
         }
 
         //Test default hide listener
-        val alert1 = Alerter.create(activityRule.activity).show()
+        val alert1 = WindowAlerter.create(activityRule.activity).show()
 
         Assert.assertTrue(alert1?.findViewById<ViewGroup>(R.id.llAlertBackground)?.hasOnClickListeners() ?: false)
 
         //Test setting listener
-        val alert3 = Alerter.create(activityRule.activity).setOnClickListener(View.OnClickListener {
+        val alert3 = WindowAlerter.create(activityRule.activity).setOnClickListener(View.OnClickListener {
             //Ignore
         }).show()
 
