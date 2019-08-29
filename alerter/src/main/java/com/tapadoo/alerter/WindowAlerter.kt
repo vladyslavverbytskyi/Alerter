@@ -16,7 +16,7 @@ import androidx.core.view.ViewCompat
 import java.lang.ref.WeakReference
 
 /**
- * Alert helper class. Will attach a temporary layout to the current activity's content, on top of
+ * Alert helper class. Will attach a temporary layout to the content of view of window provider, on top of
  * all other views. It should appear under the status bar.
  *
  * @author Kevin Murphy
@@ -34,7 +34,7 @@ class WindowAlerter private constructor() {
     /**
      * Get the enclosing Decor View
      *
-     * @return The Decor View of the Activity the Alerter was called from
+     * @return The Decor View of the WindowProvider's implementation the Alerter was called from
      */
     private val decorView: ViewGroup?
         get() {
@@ -526,9 +526,9 @@ class WindowAlerter private constructor() {
     }
 
     /**
-     * Creates a weak reference to the calling Activity
+     * Creates a weak reference to the calling WindowProvider
      *
-     * @param activity The calling Activity
+     * @param windowProvider The calling WindowProvider
      */
     private fun setWindowProvider(windowProvider: WindowProvider) {
         windowWeakReference = WeakReference(windowProvider)
@@ -539,9 +539,9 @@ class WindowAlerter private constructor() {
         private var windowWeakReference: WeakReference<WindowProvider>? = null
 
         /**
-         * Creates the Alert, and maintains a reference to the calling Activity
+         * Creates the Alert, and maintains a reference to the calling WindowProvider
          *
-         * @param activity The calling Activity
+         * @param windowProvider The calling WindowProvider
          * @return This Alerter
          */
         @JvmStatic
@@ -564,7 +564,7 @@ class WindowAlerter private constructor() {
         /**
          * Cleans up the currently showing alert view, if one is present
          *
-         * @param activity The current Activity
+         * @param windowProvider The current WindowProvider
          */
         @JvmStatic
         fun clearCurrent(windowProvider: WindowProvider) {
